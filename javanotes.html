@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Java Notes — From Scratch to OOP</title>
+</head>
+<body>
+  <header>
+    <h1>Java Notes — From Scratch to OOP</h1>
+    <p><em>Clear, detailed, beginner-friendly notes to learn Java step by step. Study each topic in depth and use the Table of Contents to jump.</em></p>
+
+    <nav aria-label="Table of contents">
+      <h2>Table of contents</h2>
+      <ol>
+        <li><a href="#intro">Introduction: What is Java?</a></li>
+        <li><a href="#jvm">JVM, JRE, JDK (How Java runs)</a></li>
+        <li><a href="#getting-started">Getting Started: Install & Run</a></li>
+        <li><a href="#hello">Hello World & Compilation</a></li>
+        <li><a href="#types">Data Types (Detailed)</a></li>
+        <li><a href="#variables">Variables, Scope & Memory</a></li>
+        <li><a href="#operators">Operators — explained</a></li>
+        <li><a href="#control">Control Flow (if, switch, loops)</a></li>
+        <li><a href="#methods">Methods & Parameter Passing</a></li>
+        <li><a href="#classes">Classes and Objects</a></li>
+        <li><a href="#constructors">Constructors & "this" keyword</a></li>
+        <li><a href="#encapsulation">Encapsulation (getters & setters)</a></li>
+        <li><a href="#inheritance">Inheritance (extends)</a></li>
+        <li><a href="#polymorphism">Polymorphism (overloading & overriding)</a></li>
+        <li><a href="#abstraction">Abstraction & Interfaces</a></li>
+        <li><a href="#practice">Practice Exercises</a></li>
+        <li><a href="#references">References</a></li>
+      </ol>
+    </nav>
+  </header>
+
+  <main>
+    <section id="intro">
+      <h2>Introduction: What is Java?</h2>
+      <p><strong>Java</strong> is a high-level, class-based, object-oriented programming language made to be platform-independent and easy to use. It focuses on readability, maintainability, and robustness. Java programs run on the <strong>Java Virtual Machine (JVM)</strong>, which allows the same compiled code to run on many different operating systems.</p>
+      <p><strong>Key properties:</strong> WORA (Write Once Run Anywhere), automatic memory management (garbage collection), strong type checking, and built-in concurrency support.</p>
+      <p><strong>Who should learn Java?</strong> Beginners who want a modern language with strong OOP support, students preparing for software roles, or anyone building cross-platform backend systems or Android apps.</p>
+    </section>
+
+    <section id="jvm">
+      <h2>JVM, JRE, JDK — How Java runs</h2>
+      <p>Understanding how Java code becomes a running program is essential.</p>
+      <ul>
+        <li><strong>JDK (Java Development Kit)</strong>: Tools for developers. Includes the compiler (javac), java launcher, and libraries. You install JDK to write and compile Java code.</li>
+        <li><strong>JRE (Java Runtime Environment)</strong>: Provides the runtime libraries and the JVM. You need JRE to run Java programs but not to compile them.</li>
+        <li><strong>JVM (Java Virtual Machine)</strong>: The virtual machine that executes Java bytecode. It provides platform independence by implementing bytecode execution for each OS.</li>
+      </ul>
+      <p>Workflow:</p>
+      <pre><code>Source (.java) --javac--> Bytecode (.class) --java/JVM--> Runs on platform</code></pre>
+      <p>Simple ASCII diagram:</p>
+      <pre><code>+-----------+   javac   +-----------+   java/JVM  +-----------+
+| Hello.java| --------> | Hello.class| ---------> |   (OS)    |
++-----------+           +-----------+            +-----------+
+      (source)            (bytecode)               (runs)
+</code></pre>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting Started: Install & Run</h2>
+      <p><strong>Windows/Mac/Linux (brief)</strong>:</p>
+      <ol>
+        <li>Download and install the latest JDK from Oracle or OpenJDK distribution.</li>
+        <li>Set <code>JAVA_HOME</code> environment variable to JDK path (optional but useful).</li>
+        <li>Open terminal/command prompt. Check with <code>javac -version</code> and <code>java -version</code>.</li>
+        <li>Create <code>HelloWorld.java</code>, write code, compile with <code>javac HelloWorld.java</code>, then run with <code>java HelloWorld</code>.</li>
+      </ol>
+      <p>If you use an IDE (Eclipse, IntelliJ IDEA, VSCode with Java extensions), it automates compile/run but you should still know command-line steps.</p>
+    </section>
+
+    <section id="hello">
+      <h2>Hello World & Compilation</h2>
+      <p><strong>Code:</strong></p>
+      <details>
+        <summary>Show HelloWorld.java</summary>
+        <pre><code>public class HelloWorld {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+    }
+}
+</code></pre>
+      </details>
+      <p><strong>Notes:</strong></p>
+      <ul>
+        <li>Class name must match the filename (<code>HelloWorld</code> → <code>HelloWorld.java</code>).</li>
+        <li><code>main</code> signature must be <code>public static void main(String[] args)</code> for the JVM to start the program.</li>
+        <li><code>System.out.println</code> prints with a newline; <code>System.out.print</code> does not add newline.</li>
+      </ul>
+    </section>
+
+    <section id="types">
+      <h2>Data Types (Detailed)</h2>
+      <p>Java has two categories of types:</p>
+      <ol>
+        <li><strong>Primitive types</strong>: fixed-size data types. They store values directly.</li>
+        <li><strong>Reference types</strong>: classes, arrays — variables store references (addresses) to objects.</li>
+      </ol>
+
+      <h3>Primitive types</h3>
+      <ul>
+        <li><code>byte</code> — 8-bit signed integer, range: -128 to 127</li>
+        <li><code>short</code> — 16-bit signed integer</li>
+        <li><code>int</code> — 32-bit signed integer (default for integer literals)</li>
+        <li><code>long</code> — 64-bit signed integer (append L to literals: <code>100L</code>)</li>
+        <li><code>float</code> — 32-bit floating point (append f: <code>3.14f</code>)</li>
+        <li><code>double</code> — 64-bit floating point (default for decimal literals)</li>
+        <li><code>char</code> — single 16-bit Unicode character (use single quotes: <code>'a'</code>)</li>
+        <li><code>boolean</code> — logical value: <code>true</code> or <code>false</code></li>
+      </ul>
+
+      <h3>Reference types</h3>
+      <p>Objects created from classes (e.g., <code>String</code>, user-defined classes), arrays, and interfaces are reference types. A variable holds a reference (pointer) to a memory location in the heap.</p>
+
+      <h3>Wrapper classes</h3>
+      <p>Each primitive has an object wrapper: <code>Integer</code>, <code>Long</code>, <code>Double</code>, <code>Character</code>, <code>Boolean</code>. Useful when working with collections that require objects (e.g., <code>ArrayList<Integer></code>).</p>
+
+      <h3>Example & notes</h3>
+      <pre><code>int a = 10;
+long big = 10000000000L;
+double d = 3.14;
+char c = 'A';
+boolean flag = true;
+String s = "hello"; // String is a reference type
+</code></pre>
+      <p><em>Important:</em> primitives are not null; reference variables can be <code>null</code>.</p>
+    </section>
+
+    <section id="variables">
+      <h2>Variables, Scope & Memory</h2>
+      <p><strong>Types of variables:</strong></p>
+      <ul>
+        <li><strong>Local variables</strong>: declared inside methods. They live on the stack and must be initialized before use.</li>
+        <li><strong>Instance variables (fields)</strong>: declared in class but outside methods. Each object has its own copy.</li>
+        <li><strong>Static variables (class variables)</strong>: declared with <code>static</code>, shared among all instances of the class.</li>
+      </ul>
+
+      <h3>Example</h3>
+      <pre><code>public class Counter {
+    private int count; // instance variable
+    private static int totalCounters; // static variable
+
+    public Counter() {
+        count = 0;
+        totalCounters++;
+    }
+}
+</code></pre>
+
+      <h3>Scope rules</h3>
+      <ul>
+        <li>Local variable scope is the block where it is declared (between <code>{ }</code>).</li>
+        <li>Instance variables have object-level scope; accessible across methods in the class.</li>
+        <li>Static variables are accessible via <code>ClassName.variable</code> and using instance references (but prefer class reference).</li>
+      </ul>
+    </section>
+
+    <section id="operators">
+      <h2>Operators — explained</h2>
+      <h3>Arithmetic</h3>
+      <p><code>+ - * / %</code> — note integer division truncates decimal part.</p>
+      <pre><code>int x = 7 / 2; // 3
+double y = 7.0 / 2; // 3.5
+</code></pre>
+
+      <h3>Assignment</h3>
+      <p><code>= += -= *= /= %=</code></p>
+
+      <h3>Relational</h3>
+      <p><code>== != &gt; &lt; &gt;= &lt;=</code> — used for comparisons. For objects, <code>==</code> compares references, use <code>equals()</code> for value comparison (if overridden).</p>
+
+      <h3>Logical</h3>
+      <p><code>&amp;&amp; || !</code> — boolean logic; note short-circuit behavior of <code>&amp;&amp;</code> and <code>||</code>.</p>
+
+      <h3>Bitwise & Shift</h3>
+      <p><code>&amp; | ^ ~ &lt;&lt; &gt;&gt; &gt;&gt;&gt;</code> — useful for low-level operations and masks.</p>
+
+      <h3>Example: equals vs ==</h3>
+      <pre><code>String a = new String("hi");
+String b = new String("hi");
+System.out.println(a == b); // false (different objects)
+System.out.println(a.equals(b)); // true (same content)
+</code></pre>
+    </section>
+
+    <section id="control">
+      <h2>Control Flow (if, switch, loops)</h2>
+      <h3>If / else</h3>
+      <pre><code>if (score &gt;= 90) {
+    grade = 'A';
+} else if (score &gt;= 75) {
+    grade = 'B';
+} else {
+    grade = 'C';
+}
+</code></pre>
+
+      <h3>Switch</h3>
+      <p>Switch works with <code>int</code>, <code>String</code> (since Java 7), enums, and a few primitive wrappers.</p>
+      <pre><code>switch (day) {
+  case "Mon":
+    // ...
+    break;
+  default:
+    // ...
+}
+</code></pre>
+
+      <h3>For loop</h3>
+      <pre><code>for (int i = 0; i &lt; n; i++) {
+    // repeated code
+}
+</code></pre>
+
+      <h3>Enhanced for (for-each)</h3>
+      <pre><code>for (String name : names) {
+    System.out.println(name);
+}
+</code></pre>
+
+      <h3>While & Do-While</h3>
+      <pre><code>while (condition) {
+    // runs while condition true
+}
+
+do {
+   // runs at least once
+} while (condition);
+</code></pre>
+
+      <h3>Loop control</h3>
+      <p><code>break</code> exits loop; <code>continue</code> skips to next iteration.</p>
+    </section>
+
+    <section id="methods">
+      <h2>Methods & Parameter Passing</h2>
+      <p>Methods are functions defined inside classes. They encapsulate behavior. Method declaration includes return type, name, parameters, and body.</p>
+
+      <h3>Example</h3>
+      <details>
+        <summary>Show example methods</summary>
+        <pre><code>public class MathUtil {
+    // method with two int parameters and int return
+    public int add(int a, int b) {
+        return a + b;
+    }
+
+    // overloaded method with double
+    public double add(double a, double b) {
+        return a + b;
+    }
+}
+</code></pre>
+      </details>
+
+      <h3>Pass-by-value</h3>
+      <p>Java uses pass-by-value for method parameters. For primitives, value is copied. For objects, the reference is copied (so the method receives a copy of the reference pointing to the same object). This means you can modify the object's internal state but cannot change the caller's reference to point to a different object.</p>
+
+      <h3>Example: modifying object inside method</h3>
+      <pre><code>void changeName(Person p) {
+    p.setName("NewName"); // modifies original object
+}
+
+void reassign(Person p) {
+    p = new Person("Another"); // only changes local copy of reference
+}
+</code></pre>
+    </section>
+
+    <section id="classes">
+      <h2>Classes and Objects</h2>
+      <p><strong>Class</strong> is a blueprint that defines fields (data) and methods (behavior). An <strong>object</strong> is an instance of a class.</p>
+
+      <h3>Example: simple class</h3>
+      <details>
+        <summary>Show Person class</summary>
+        <pre><code>public class Person {
+    String name; // field
+    int age;     // field
+
+    public void sayHello() {
+        System.out.println("Hello, my name is " + name);
+    }
+}
+
+// creating objects:
+Person p = new Person();
+p.name = "Arun";
+p.age = 20;
+p.sayHello();
+</code></pre>
+      </details>
+
+      <h3>Memory layout (simple)</h3>
+      <p>Objects are stored in the heap. Local references (variables) referring to objects are stored on the stack (inside methods).</p>
+    </section>
+
+    <section id="constructors">
+      <h2>Constructors & the <code>this</code> keyword</h2>
+      <p><strong>Constructor</strong> is a special method called when an object is created. It has the same name as the class and no return type.</p>
+
+      <details>
+        <summary>Show constructor examples</summary>
+        <pre><code>public class Student {
+    private String name;
+    private int roll;
+
+    // default constructor
+    public Student() {
+        this.name = "Unknown";
+        this.roll = 0;
+    }
+
+    // parameterized constructor
+    public Student(String name, int roll) {
+        this.name = name; // 'this' used to refer instance variable
+        this.roll = roll;
+    }
+}
+
+Student s1 = new Student();
+Student s2 = new Student("Meena", 12);
+</code></pre>
+      </details>
+
+      <p><strong>this</strong> refers to the current object. It's useful to disambiguate instance variables from parameters, or to call other constructors using <code>this(...)</code>.</p>
+    </section>
+
+    <section id="encapsulation">
+      <h2>Encapsulation (getters & setters)</h2>
+      <p>Encapsulation hides internal state and exposes behavior through methods. Use <code>private</code> for fields and provide <code>public</code> getters/setters.</p>
+
+      <details>
+        <summary>Show encapsulation example</summary>
+        <pre><code>public class Account {
+    private double balance;
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void deposit(double amount) {
+        if (amount &gt; 0) balance += amount;
+    }
+}
+</code></pre>
+      </details>
+
+      <p>Benefits: control access, validate input, and maintain invariants.</p>
+    </section>
+
+    <section id="inheritance">
+      <h2>Inheritance (extends)</h2>
+      <p>Inheritance allows a class to reuse fields and methods from another class. <code>class Sub extends Super</code>.</p>
+
+      <details>
+        <summary>Show inheritance example</summary>
+        <pre><code>public class Animal {
+    public void eat() { System.out.println("eating"); }
+}
+
+public class Dog extends Animal {
+    public void bark() { System.out.println("barking"); }
+}
+
+Dog d = new Dog();
+d.eat(); // inherited
+d.bark();
+</code></pre>
+      </details>
+
+      <p>Java supports single inheritance for classes (a class can extend only one class) but allows multiple interfaces.</p>
+    </section>
+
+    <section id="polymorphism">
+      <h2>Polymorphism (Overloading & Overriding)</h2>
+      <h3>Method Overloading (compile-time)</h3>
+      <p>Same method name, different parameter lists in the same class.</p>
+      <pre><code>class Printer {
+    void print(String s) { }
+    void print(int n) { }
+}
+</code></pre>
+
+      <h3>Method Overriding (runtime)</h3>
+      <p>Subclass provides a specific implementation of a method declared in parent class. This enables dynamic method dispatch.</p>
+      <details>
+        <summary>Show overriding example</summary>
+        <pre><code>class Animal {
+    void sound() { System.out.println("some sound"); }
+}
+class Cat extends Animal {
+    @Override
+    void sound() { System.out.println("meow"); }
+}
+
+Animal a = new Cat();
+a.sound(); // prints "meow" -> runtime decides
+</code></pre>
+      </details>
+
+      <p>Polymorphism allows writing code that works on the base type while concrete classes provide behavior.</p>
+    </section>
+
+    <section id="abstraction">
+      <h2>Abstraction & Interfaces</h2>
+      <p>Abstraction focuses on what an object can do rather than how it does it. Use <code>abstract</code> classes or <code>interface</code> to declare methods without full implementation.</p>
+
+      <details>
+        <summary>Show interface example</summary>
+        <pre><code>interface Flyable {
+    void fly();
+}
+
+class Bird implements Flyable {
+    public void fly() { System.out.println("Bird flying"); }
+}
+</code></pre>
+      </details>
+
+      <p>Since Java 8, interfaces can have <code>default</code> and <code>static</code> methods with implementations.</p>
+    </section>
+
+    <section id="practice">
+      <h2>Practice Exercises</h2>
+      <ol>
+        <li><strong>Print Fibonacci series</strong> up to n terms.</li>
+        <li><strong>Check palindrome</strong> for string and number.</li>
+        <li><strong>Simple class project:</strong> Create <code>Book</code> class with fields and methods for borrowing/returning and maintain stock count (use static).</li>
+        <li><strong>Inheritance exercise:</strong> Create <code>Vehicle</code>, extend <code>Car</code> and <code>Bike</code>, override a <code>start()</code> method.</li>
+      </ol>
+      <p>Try writing code on your own; then compare with answers (you can ask me for solutions anytime).</p>
+    </section>
+
+  <section id="references">
+    <h2>📚 References & Resources</h2>
+    <p>Learn Java in your preferred language:</p>
+    <h3>Tamil</h3>
+    <ul>
+      <li><a href="https://youtu.be/kGxSyqKbzsc?si=AT6wf6CX6BmPHVjz" target="_blank">Java Basics in Tamil - Video 1</a></li>
+      <li><a href="https://youtu.be/Gex-j7GlCHc?si=tzWQgHTCQxWqyHK8" target="_blank">Java Basics in Tamil - Video 2</a></li>
+    </ul>
+    <h3>English</h3>
+    <ul>
+      <li><a href="https://youtu.be/xk4_1vDrzzo?si=i2R8gGV4yaBfHIPh" target="_blank">Java Tutorial English - FreeCodeCamp</a></li>
+      <li><a href="https://youtu.be/eIrMbAQSU34?si=f6CFKhBgzu0uuFZx" target="_blank">Java Tutorial English - Telusko</a></li>
+      <li><a href="https://youtu.be/A74TOX803D0?si=XBa6j1-nzCXu8OjT" target="_blank">Java Tutorial English - BroCode</a></li>
+    </ul>
+    <h3>Hindi</h3>
+    <ul>
+      <li><a href="https://youtu.be/UmnCZ7-9yDY?si=uEh6A2VMJNDygqvu" target="_blank">Java Tutorial in Hindi - CodeWithHarry</a></li>
+    </ul>
+  </section>
+
+  <!-- Practice Section -->
+  <section id="practice">
+    <h2>💻 Practice Platforms</h2>
+    <p>After learning, strengthen your skills by practicing on coding platforms:</p>
+    <ul>
+      <li><a href="https://www.codechef.com/" target="_blank">CodeChef</a></li>
+      <li><a href="https://www.hackerrank.com/domains/tutorials/10-days-of-java" target="_blank">HackerRank</a></li>
+      <li><a href="https://www.geeksforgeeks.org/java/" target="_blank">GeeksforGeeks</a></li>
+    </ul>
+  </section>
+
+  <!-- Connect Section -->
+  <section id="connect">
+    <h2>🤝 Connect with Me</h2>
+    <p>If you want to connect, collaborate, or follow my journey, here’s my LinkedIn:</p>
+    <p><a href="https://www.linkedin.com/in/shruthimg237/" target="_blank">🌐 Shruthi M G on LinkedIn</a></p>
+  </section>
+
+  <footer>
+    <p>📖 Java Notes Website | Created by Shruthi M G | 2025</p>
+  </footer>
+</body>
+</html>
+
