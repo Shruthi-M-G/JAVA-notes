@@ -26,6 +26,6 @@ This is a beginner-focused project.
 If you find mistakes or want to improve notes, feel free to fork the repo and create a pull request.  
 
 Contact
-Created with ❤️ by [Your Name]  
+Created with ❤️ by [SHRUTHI M G]  
 - GitHub: [Shruthi-M-G](https://https://github.com/Shruthi-M-G)  
 - LinkedIn: [https://www.linkedin.com/in/shruthimg237/]
